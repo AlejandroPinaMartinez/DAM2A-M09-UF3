@@ -19,20 +19,9 @@ public class Client {
         }
     }
 
-    public void envia() {
-        try (Scanner scanner = new Scanner(System.in)) {
-            String missatge;
-            System.out.println("Prem Enter per tancar el servidor...");
-            missatge = scanner.nextLine();
-            while (missatge != null && !missatge.isEmpty()){
-                out.println(missatge);
-                System.out.println("Enviat al servidor: " + missatge);
-                System.out.println("Prem Enter per tancar el servidor...");
-                missatge = scanner.nextLine();
-            }
-        } catch (Exception e) {
-            System.err.println("Error en la comunicació: " + e.getMessage());
-        }
+    public void envia(String missatge) {
+        out.println(missatge);
+        System.out.println("Enviat al servidor: " + missatge);
     }
 
     public void tanca() {
@@ -48,7 +37,23 @@ public class Client {
     public static void main(String[] args) {
         Client client = new Client();
         client.conecta();
-        client.envia();
+        try (Scanner scanner = new Scanner(System.in)) {
+            String missatge;
+            client.envia("Prova d'enviament 1");
+            client.envia("Prova d'enviament 2");
+            client.envia("Adéu!");
+            System.out.println("Prem Enter per tancar el servidor...");
+            System.out.print("Missatge a enviar: ");
+            missatge = scanner.nextLine();
+            while (missatge != null && !missatge.isEmpty()){
+                client.envia(missatge);
+                System.out.println("Prem Enter per tancar el servidor...");
+                System.out.print("Missatge a enviar: ");
+                missatge = scanner.nextLine();
+            }
+        } catch (Exception e) {
+            System.err.println("Error en la comunicació: " + e.getMessage());
+        }
         client.tanca();
     }
 }
