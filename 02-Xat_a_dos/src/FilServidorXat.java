@@ -13,14 +13,13 @@ public class FilServidorXat extends Thread {
         try {
             while (true) {
                 String missatge = (String) in.readObject();
-                System.out.println("Rebut: " + missatge);
-                
                 if (missatge.equals(MSG_SORTIR)) {
                     break;
                 }
+                System.out.println("Rebut: " + missatge);
             }
         } catch (IOException | ClassNotFoundException e) {
-            System.out.println("El client ha tancat la connexió.");
+            // Evitar imprimir mensajes no deseados
         }
     }
 }
