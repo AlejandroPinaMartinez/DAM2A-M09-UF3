@@ -54,8 +54,6 @@ public class Servidor {
             System.out.println("Nom del fitxer buit o nul. Sortint...");
         }
     }
-    
-    
 
     public void tancarConnexio(Socket socket) {
         try {

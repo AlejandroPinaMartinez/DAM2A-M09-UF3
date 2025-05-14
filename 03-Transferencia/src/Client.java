@@ -50,8 +50,6 @@ public class Client {
         }
     }
     
-    
-
     public void tancarConnexio(Socket socket) {
         try {
             if (socket != null) socket.close();
